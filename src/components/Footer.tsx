@@ -62,23 +62,23 @@ const Footer: React.FC = () => {
             <div className="space-y-5">
               <div className="flex items-start space-x-4">
                 <MapPin className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                <span className="text-stone-400">г. Москва, ул. Кофейная, 15</span>
+                <span className="text-stone-400">г. Волжский, ул. (нету)</span>
               </div>
               <div className="flex items-center space-x-4">
                 <Mail className="h-5 w-5 text-emerald-400 flex-shrink-0" />
                 <a href="mailto:info@reservecold.ru" className="text-stone-400 hover:text-emerald-400 transition-colors">
-                  info@reservecold.ru
+                  zssayta@list.ru
                 </a>
               </div>
               <div className="flex items-center space-x-4">
                 <Phone className="h-5 w-5 text-emerald-400 flex-shrink-0" />
-                <a href="tel:+74951234567" className="text-stone-400 hover:text-emerald-400 transition-colors">
-                  +7 (495) 123-45-67
+                <a href="tel:+79954120966" className="text-stone-400 hover:text-emerald-400 transition-colors">
+                  +7 (995) 412 09 66
                 </a>
               </div>
               <div className="flex items-start space-x-4">
                 <Clock className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                <span className="text-stone-400">Пн-Пт: 9:00 - 18:00</span>
+                <span className="text-stone-400">Пока не работаем</span>
               </div>
             </div>
           </div>
