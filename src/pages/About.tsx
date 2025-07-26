@@ -108,18 +108,17 @@ const About: React.FC = () => {
               <span className="inline-block px-4 py-2 bg-emerald-50 text-emerald-600 rounded-full text-sm font-medium mb-6">
                 Наша история
               </span>
-              <h2 className="text-3xl font-bold text-stone-900 mb-6">От маленькой лаборатории к лидеру рынка</h2>
+              <h2 className="text-3xl font-bold text-stone-900 mb-6">Начинаем путь маленькой лаборатории</h2>
               <div className="space-y-6 text-stone-700">
                 <p>
-                  Начав с небольшой лаборатории в Москве, мы провели более 500 экспериментов с разными методами экстракции, 
-                  прежде чем нашли идеальный баланс вкуса и аромата.
+                  Начав с небольшой лаборатории в городе Волжском, мы провели еще ни одного эксперимента
                 </p>
                 <p>
-                  Сегодня наше производство объединяет традиционные методы холодного заваривания с прецизионным контролем температуры, 
+                  Наше производство объединяет традиционные методы холодного заваривания с прецизионным контролем температуры, 
                   что позволяет раскрыть всю палитру вкусов спешелти кофе.
                 </p>
                 <p>
-                  Мы гордимся прямыми отношениями с фермерами из Эфиопии, Колумбии, Бразилии и других регионов, 
+                  Мы гордимся фермерами из Эфиопии, Колумбии, Бразилии и других регионов, 
                   что гарантирует справедливые цены и исключительное качество сырья.
                 </p>
               </div>
@@ -166,7 +165,7 @@ const About: React.FC = () => {
                 <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/10">
                   <div className="flex items-center mb-4">
                     <Smile className="h-6 w-6 text-emerald-400 mr-3" />
-                    <div className="text-3xl font-bold">50k+</div>
+                    <div className="text-3xl font-bold">0</div>
                   </div>
                   <div className="text-stone-300 text-sm">Довольных клиентов</div>
                 </div>
@@ -196,10 +195,10 @@ const About: React.FC = () => {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold text-stone-900 mb-1">Алексей Петров</h3>
-                <p className="text-emerald-600 mb-4">Главный обжарщик</p>
+                <h3 className="text-xl font-bold text-stone-900 mb-1">Данечка</h3>
+                <p className="text-emerald-600 mb-4">Основатель</p>
                 <p className="text-stone-600">
-                  Q-грейдер с 10-летним опытом, специалист по африканским сортам кофе
+                  Мечтатель, и основатель этой мега крутой компании!
                 </p>
               </div>
             </div>
@@ -211,10 +210,10 @@ const About: React.FC = () => {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold text-stone-900 mb-1">Мария Иванова</h3>
-                <p className="text-emerald-600 mb-4">Технолог заваривания</p>
+                <h3 className="text-xl font-bold text-stone-900 mb-1">Полинка</h3>
+                <p className="text-emerald-600 mb-4">Работяга</p>
                 <p className="text-stone-600">
-                  Разработала 15 уникальных профилей холодной экстракции
+                  Будет работать 12 дней по 12 часов подряд во благо вкуса!
                 </p>
               </div>
             </div>
@@ -226,10 +225,10 @@ const About: React.FC = () => {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold text-stone-900 mb-1">Дмитрий Соколов</h3>
-                <p className="text-emerald-600 mb-4">Директор по закупкам</p>
+                <h3 className="text-xl font-bold text-stone-900 mb-1">Михаил Грачев</h3>
+                <p className="text-emerald-600 mb-4">Инвестор</p>
                 <p className="text-stone-600">
-                  Лично посещает фермы и отбирает лучшие лоты для Reserve Cold
+                  Лично инвестирует в развитие Reserve Cold
                 </p>
               </div>
             </div>
