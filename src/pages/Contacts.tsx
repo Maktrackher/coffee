@@ -78,7 +78,7 @@ const Contacts: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-stone-900 mb-4">Телефон и мессенджеры</h3>
               <p className="text-stone-600 mb-2">
-                +7 (495) 123-45-67
+                +7 (995) 412 09 66
               </p>
               <p className="text-stone-600">
                 (WhatsApp, Telegram)
