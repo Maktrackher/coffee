@@ -205,7 +205,7 @@ const About: React.FC = () => {
             
             <div className="bg-stone-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
               <img 
-                src="https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg" 
+                src="https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//polya.jpg" 
                 alt="Coffee master" 
                 className="w-full h-64 object-cover"
               />
