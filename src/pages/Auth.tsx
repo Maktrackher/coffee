@@ -6,14 +6,7 @@ import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 
 export const AuthPage = () => {
-  if (checkError && checkError.status !== 401) {
-  throw checkError;
-}
 
-if (user) {
-  setError('Пользователь с таким email уже существует');
-  return;
-}
   // Состояния формы
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
