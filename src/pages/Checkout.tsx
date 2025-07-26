@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, CreditCard, Truck, Shield, Check } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, CreditCard, Truck, Shield, Check, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Customer } from '../types';
+import { supabase } from '../lib/supabase';
+import { toast } from 'react-hot-toast';
 
 const Checkout: React.FC = () => {
   const { state, clearCart } = useCart();
@@ -17,6 +19,7 @@ const Checkout: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,12 +33,41 @@ const Checkout: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate order processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Получаем текущего пользователя
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        throw new Error('Пользователь не авторизован');
+      }
 
-    setOrderComplete(true);
-    clearCart();
-    setIsSubmitting(false);
+      // Создаем запись заказа в Supabase
+      const { data: order, error } = await supabase
+        .from('orders')
+        .insert([{
+          user_id: user.id,
+          customer_details: customer,
+          items: state.items,
+          subtotal: state.total,
+          tax: state.total * 0.08,
+          total: state.total * 1.08,
+          status: 'processing'
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      // Очищаем корзину и переходим к завершению заказа
+      clearCart();
+      setOrderComplete(true);
+      toast.success('Заказ успешно оформлен!');
+    } catch (error) {
+      console.error('Ошибка при оформлении заказа:', error);
+      toast.error('Произошла ошибка при оформлении заказа');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (state.items.length === 0 && !orderComplete) {
@@ -88,10 +120,10 @@ const Checkout: React.FC = () => {
                 Продолжить покупки
               </Link>
               <Link
-                to="/"
+                to="/profile"
                 className="inline-flex items-center justify-center px-6 py-3 border border-stone-400 text-stone-200 font-medium rounded-xl hover:bg-white/5 transition-all duration-300"
               >
-                На главную
+                Посмотреть заказы
               </Link>
             </div>
           </div>
@@ -256,7 +288,12 @@ const Checkout: React.FC = () => {
                   disabled={isSubmitting}
                   className="w-full flex items-center justify-center px-6 py-4 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-300 shadow-lg hover:shadow-emerald-200/30 disabled:bg-stone-400 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Обработка...' : 'Подтвердить заказ'}
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                      Оформление...
+                    </>
+                  ) : 'Подтвердить заказ'}
                 </button>
               </form>
             </div>
