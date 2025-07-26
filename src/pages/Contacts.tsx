@@ -62,10 +62,7 @@ const Contacts: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-stone-900 mb-4">Электронная почта</h3>
               <p className="text-stone-600 mb-2">
-                info@reservecold.ru
-              </p>
-              <p className="text-stone-600">
-                orders@reservecold.ru
+                zssayta@list.ru
               </p>
               <Link 
                 to="mailto:info@reservecold.ru" 
