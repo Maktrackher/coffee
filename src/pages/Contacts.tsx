@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Phone, Clock, Instagram, Facebook, MessageSquare, ChevronRight, Telegram } from 'lucide-react';
+import { MapPin, Mail, Phone, Clock, Instagram, Facebook, MessageSquare, ChevronRight, Send } from 'lucide-react';
 
 const Contacts: React.FC = () => {
   return (
@@ -162,9 +162,9 @@ const Contacts: React.FC = () => {
                   <a 
                     href="#" 
                     className="inline-flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-sm border border-stone-200 hover:bg-emerald-50 transition-colors"
-                    aria-label="Phone"
+                    aria-label="Send"
                   >
-                    <Phone className="h-6 w-6 text-stone-700" />
+                    <Send className="h-6 w-6 text-stone-700" />
                   </a>
                   <a 
                     href="#" 
