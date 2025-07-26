@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { User, Edit, LogOut, ArrowLeft, Loader2, Upload, X } from 'lucide-react';
+import { User, Edit, LogOut, ArrowLeft, Loader2, Upload, X, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 
@@ -14,6 +14,8 @@ const Profile = () => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [ordersLoading, setOrdersLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +27,7 @@ const Profile = () => {
         setUser(user);
 
         if (user) {
+          // Загружаем профиль пользователя
           const { data: profile, error: profileError } = await supabase
             .from('profiles')
             .select('*')
@@ -40,12 +43,24 @@ const Profile = () => {
               await downloadImage(profile.avatar_url);
             }
           }
+
+          // Загружаем заказы пользователя
+          const { data: orders, error: ordersError } = await supabase
+            .from('orders')
+            .select('*')
+            .eq('user_id', user.id)
+            .order('created_at', { ascending: false });
+
+          if (ordersError) throw ordersError;
+          
+          setOrders(orders || []);
         }
       } catch (error) {
-        console.error('Error fetching profile:', error);
-        toast.error('Ошибка загрузки профиля');
+        console.error('Error fetching data:', error);
+        toast.error('Ошибка загрузки данных');
       } finally {
         setLoading(false);
+        setOrdersLoading(false);
       }
     };
 
@@ -410,28 +425,98 @@ const Profile = () => {
           {/* Order History */}
           <div className="border-t border-stone-100 p-6">
             <h2 className="text-xl font-semibold mb-4 text-stone-800">История заказов</h2>
-            <motion.div 
-              whileHover={{ y: -2 }}
-              className="bg-stone-50 p-6 rounded-lg text-center border border-stone-200"
-            >
-              <div className="max-w-xs mx-auto">
-                <svg className="mx-auto h-12 w-12 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <h3 className="mt-2 text-sm font-medium text-stone-900">Здесь будут ваши заказы</h3>
-                <p className="mt-1 text-sm text-stone-500">Совершайте покупки, чтобы увидеть историю заказов</p>
-                <div className="mt-6">
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => navigate('/products')}
-                    className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg hover:opacity-90 transition-all shadow-sm"
-                  >
-                    Перейти в каталог
-                  </motion.button>
-                </div>
+            
+            {ordersLoading ? (
+              <div className="flex justify-center py-8">
+                <Loader2 className="h-6 w-6 animate-spin text-emerald-500" />
               </div>
-            </motion.div>
+            ) : orders.length > 0 ? (
+              <div className="space-y-4">
+                {orders.map((order) => (
+                  <motion.div 
+                    key={order.id}
+                    whileHover={{ y: -2 }}
+                    className="bg-stone-50 p-6 rounded-lg border border-stone-200"
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="font-medium text-stone-900">
+                          Заказ #{order.id.slice(0, 8)}
+                        </h3>
+                        <p className="text-sm text-stone-500">
+                          {new Date(order.created_at).toLocaleDateString('ru-RU', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                          })}
+                        </p>
+                      </div>
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        order.status === 'completed' 
+                          ? 'bg-emerald-100 text-emerald-800' 
+                          : order.status === 'cancelled' 
+                            ? 'bg-red-100 text-red-800' 
+                            : 'bg-amber-100 text-amber-800'
+                      }`}>
+                        {order.status === 'completed' ? 'Завершен' : 
+                         order.status === 'cancelled' ? 'Отменен' : 'В обработке'}
+                      </span>
+                    </div>
+                    
+                    <div className="space-y-3 mb-4">
+                      {order.items.map((item: any) => (
+                        <div key={item.product.id} className="flex items-center space-x-3">
+                          <div className="h-12 w-12 bg-white rounded-lg border border-stone-200 overflow-hidden">
+                            {item.product.image && (
+                              <img 
+                                src={item.product.image} 
+                                alt={item.product.name}
+                                className="h-full w-full object-cover"
+                              />
+                            )}
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-stone-800">{item.product.name}</p>
+                            <p className="text-xs text-stone-500">{item.quantity} × ${item.product.price.toFixed(2)}</p>
+                          </div>
+                          <p className="text-sm font-medium">
+                            ${(item.product.price * item.quantity).toFixed(2)}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div className="border-t border-stone-200 pt-3">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-stone-600">Итого</span>
+                        <span className="font-medium">${order.total.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <motion.div 
+                whileHover={{ y: -2 }}
+                className="bg-stone-50 p-6 rounded-lg text-center border border-stone-200"
+              >
+                <div className="max-w-xs mx-auto">
+                  <ShoppingBag className="mx-auto h-12 w-12 text-stone-400" />
+                  <h3 className="mt-2 text-sm font-medium text-stone-900">Здесь будут ваши заказы</h3>
+                  <p className="mt-1 text-sm text-stone-500">Совершайте покупки, чтобы увидеть историю заказов</p>
+                  <div className="mt-6">
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => navigate('/products')}
+                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg hover:opacity-90 transition-all shadow-sm"
+                    >
+                      Перейти в каталог
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </div>
 
           {/* Logout and Avatar Actions */}
