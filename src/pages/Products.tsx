@@ -83,7 +83,7 @@ const Products: React.FC = () => {
     <div className="bg-stone-50 min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-stone-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/4556982/pexels-photo-4556982.jpeg')] bg-cover bg-center opacity-30" />
+        <div className="absolute inset-0 bg-[url('https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coldbrew-hero1.jpg')] bg-cover bg-center opacity-30" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48">
           <div className="max-w-2xl">
             <span className="inline-block px-4 py-2 bg-emerald-600/20 text-emerald-400 rounded-full text-sm font-medium mb-6 backdrop-blur-sm border border-emerald-400/30">
