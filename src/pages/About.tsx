@@ -97,7 +97,7 @@ const About: React.FC = () => {
                       <Coffee className="h-6 w-6 text-emerald-600" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-stone-900">2018</div>
+                      <div className="text-2xl font-bold text-stone-900">2025</div>
                       <div className="text-stone-600 text-sm">Год основания</div>
                     </div>
                   </div>
