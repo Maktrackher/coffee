@@ -190,7 +190,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-stone-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
               <img 
-                src="https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg" 
+                src="https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//dane4ka.jpg" 
                 alt="Coffee master" 
                 className="w-full h-64 object-cover"
               />
