@@ -76,26 +76,35 @@ export const AuthPage = () => {
     }
   };
 
-  // Создание или обновление профиля
+  // Создание или обновление профиля с учетом RLS
   const upsertUserProfile = async (userId: string, name: string, email: string) => {
     try {
-      const { error } = await supabase
+      // Сначала пробуем обновить существующий профиль
+      const { error: updateError } = await supabase
         .from('profiles')
-        .upsert({
-          id: userId,
+        .update({
           name: name,
           email: email,
           updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'id'
-        });
+        })
+        .eq('id', userId);
 
-      if (error) throw error;
+      // Если обновление не удалось (профиль не существует), создаем новый
+      if (updateError) {
+        const { error: insertError } = await supabase
+          .from('profiles')
+          .insert({
+            id: userId,
+            name: name,
+            email: email,
+            updated_at: new Date().toISOString()
+          });
+
+        if (insertError) throw insertError;
+      }
     } catch (error) {
       console.error('Profile upsert error:', error);
-      if (error.code !== '23505') {
-        throw new Error('Ошибка при обновлении профиля');
-      }
+      throw new Error('Ошибка при обновлении профиля');
     }
   };
 
@@ -196,6 +205,7 @@ export const AuthPage = () => {
         err.code === '23505' ? 'Профиль уже существует' :
         err.message.includes('User already registered') ? 'Пользователь с таким email уже существует. Проверьте почту для подтверждения.' :
         err.message.includes('Email rate limit exceeded') ? 'Слишком много запросов. Попробуйте позже' :
+        err.message.includes('new row violates row-level security policy') ? 'Ошибка доступа. Пожалуйста, войдите снова.' :
         err.message.includes('Ошибка при создании профиля') ? 'Ошибка при создании профиля' :
         err.message || 'Произошла ошибка при авторизации';
       
