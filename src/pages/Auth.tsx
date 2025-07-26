@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 
 export const AuthPage = () => {
-
   // Состояния формы
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -60,20 +59,16 @@ export const AuthPage = () => {
     return true;
   };
 
-  // Проверка существования профиля
-  const checkProfileExists = async (userId: string): Promise<boolean> => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('id', userId)
-      .single();
-
-    if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
-      console.error('Profile check error:', error);
+  // Проверка существования пользователя
+  const checkUserExists = async (email: string) => {
+    const { data: { user }, error } = await supabase.auth.admin.getUserById(email);
+    
+    if (error && error.status !== 404) {
+      console.error('Error checking user:', error);
       return false;
     }
-
-    return !!data;
+    
+    return !!user;
   };
 
   // Создание или обновление профиля
@@ -91,10 +86,8 @@ export const AuthPage = () => {
         });
 
       if (error) throw error;
-      
     } catch (error) {
       console.error('Profile upsert error:', error);
-      // Если это ошибка дублирования - не считаем критичной
       if (error.code !== '23505') {
         throw new Error('Ошибка при обновлении профиля');
       }
@@ -117,16 +110,51 @@ export const AuthPage = () => {
     try {
       if (isLogin) {
         // Вход пользователя
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data: { user }, error } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password
         });
 
         if (error) throw error;
         
+        // Проверка подтверждения email
+        if (user && !user.email_confirmed_at) {
+          await supabase.auth.resend({
+            type: 'signup',
+            email: formData.email,
+            options: {
+              emailRedirectTo: `${window.location.origin}/profile`
+            }
+          });
+          
+          setEmailSent(true);
+          toast.success('Email не подтвержден. Новое письмо отправлено!');
+          return;
+        }
+        
         toast.success('Вход выполнен успешно!');
         navigate('/profile');
       } else {
+        // Проверка существования пользователя перед регистрацией
+        const userExists = await checkUserExists(formData.email);
+        if (userExists) {
+          // Пытаемся отправить magic link для входа
+          const { error: magicLinkError } = await supabase.auth.signInWithOtp({
+            email: formData.email,
+            options: {
+              emailRedirectTo: `${window.location.origin}/profile`
+            }
+          });
+
+          if (!magicLinkError) {
+            setEmailSent(true);
+            toast.success('Вы уже зарегистрированы. Ссылка для входа отправлена на ваш email!');
+            return;
+          }
+          
+          throw new Error('Пользователь с таким email уже существует. Войдите или восстановите пароль.');
+        }
+
         // Регистрация пользователя
         const { data, error: signUpError } = await supabase.auth.signUp({
           email: formData.email,
@@ -138,7 +166,6 @@ export const AuthPage = () => {
         });
 
         if (signUpError) {
-          // Обработка ограничения скорости запросов
           if (signUpError.message.includes('rate limit') || signUpError.message.includes('seconds')) {
             const waitTime = 60;
             setCooldown(waitTime);
@@ -162,10 +189,10 @@ export const AuthPage = () => {
       const errorMessage = 
         err.message.includes('Invalid login credentials') ? 'Неверный email или пароль' :
         err.code === '23505' ? 'Профиль уже существует' :
-        err.message.includes('User already registered') ? 'Пользователь с таким email уже существует' :
+        err.message.includes('User already registered') ? 'Пользователь с таким email уже существует. Проверьте почту для подтверждения.' :
         err.message.includes('Email rate limit exceeded') ? 'Слишком много запросов. Попробуйте позже' :
         err.message.includes('Ошибка при создании профиля') ? 'Ошибка при создании профиля' :
-        'Произошла ошибка при авторизации';
+        err.message || 'Произошла ошибка при авторизации';
       
       setError(errorMessage);
       toast.error(errorMessage);
@@ -224,7 +251,7 @@ export const AuthPage = () => {
           </h2>
           <p className="text-stone-600 mb-6">
             {isLogin 
-              ? 'Мы отправили ссылку для сброса пароля на вашу почту'
+              ? 'Мы отправили ссылку для входа на вашу почту'
               : 'Мы отправили ссылку для подтверждения регистрации на вашу почту'}
           </p>
           <button
