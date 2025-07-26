@@ -14,10 +14,10 @@ export const products: Product[] = [
     price: 2499,
     originalPrice: 2999,
     image: {
-      main: 'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//first.jpg',
+      main: 'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe1.jpg',
       gallery: [
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//first.jpg',
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//first.jpg'
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe1.jpg',
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe1.jpg'
       ]
     },
     category: 'Моносорт',
@@ -71,10 +71,10 @@ export const products: Product[] = [
     price: 2299,
     originalPrice: 2599,
     image: {
-      main: 'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//fourd.jpg',
+      main: 'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe2.jpg',
       gallery: [
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//fourd.jpg',
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//fourd.jpg'
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe2.jpg',
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe2.jpg'
       ]
     },
     category: 'Моносорт',
@@ -125,10 +125,10 @@ export const products: Product[] = [
     ],
     price: 1999,
     image: {
-      main: 'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//second.jpg',
+      main: 'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe3.jpg',
       gallery: [
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//second.jpg',
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//second.jpg'
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe3.jpg',
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe3.jpg'
       ]
     },
     category: 'Купаж',
@@ -174,10 +174,10 @@ export const products: Product[] = [
     ],
     price: 2199,
     image: {
-      main: 'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//third.jpg',
+      main: 'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe4.jpg',
       gallery: [
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//third.jpg',
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//third.jpg'
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe4.jpg',
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe4.jpg'
       ]
     },
     category: 'Без кофеина',
@@ -224,10 +224,10 @@ export const products: Product[] = [
     price: 2699,
     originalPrice: 2999,
     image: {
-      main: 'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//fifth.jpg',
+      main: 'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe5.jpg',
       gallery: [
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//fifth.jpg',
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//fifth.jpg'
+       'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe5.jpg',
+       'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe5.jpg'
       ]
     },
     category: 'Специальный',
@@ -278,10 +278,10 @@ export const products: Product[] = [
     ],
     price: 2399,
     image: {
-      main: 'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//6.jpg',
+      main: 'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe6.jpg',
       gallery: [
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//6.jpg',
-        'https://yrvgwqjdwbzjktvgwsqv.supabase.co/storage/v1/object/public/images//6.jpg'
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe6.jpg',
+        'https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe6.jpg'
       ]
     },
     category: 'Моносорт',
