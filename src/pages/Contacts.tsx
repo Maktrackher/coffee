@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Phone, Clock, Instagram, Facebook, MessageSquare, ChevronRight } from 'lucide-react';
+import { MapPin, Mail, Phone, Clock, Instagram, Facebook, MessageSquare, ChevronRight, Telegram } from 'lucide-react';
 
 const Contacts: React.FC = () => {
   return (
