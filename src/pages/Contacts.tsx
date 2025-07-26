@@ -120,10 +120,10 @@ const Contacts: React.FC = () => {
                     <Clock className="h-6 w-6 text-emerald-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-stone-900 mb-2">Кофейня Reserve Cold</h3>
+                    <h3 className="text-xl font-semibold text-stone-900 mb-2">Кофейня Reserve Cold (Запланирована)</h3>
                     <p className="text-stone-600">
-                      Пн-Пт: 8:00 - 20:00<br />
-                      Сб-Вс: 9:00 - 22:00
+                      Пн-Пт: 00:00 - 00:00<br />
+                      Сб-Вс: 00:00 - 00:00
                     </p>
                   </div>
                 </div>
@@ -135,7 +135,7 @@ const Contacts: React.FC = () => {
                   <div>
                     <h3 className="text-xl font-semibold text-stone-900 mb-2">Служба доставки</h3>
                     <p className="text-stone-600">
-                      Ежедневно: 10:00 - 19:00
+                      Ежедневно: нету
                     </p>
                   </div>
                 </div>
@@ -147,7 +147,7 @@ const Contacts: React.FC = () => {
                   <div>
                     <h3 className="text-xl font-semibold text-stone-900 mb-2">Поддержка клиентов</h3>
                     <p className="text-stone-600">
-                      Пн-Пт: 9:00 - 18:00
+                      Пн-Пт: нету
                     </p>
                   </div>
                 </div>
@@ -162,9 +162,9 @@ const Contacts: React.FC = () => {
                   <a 
                     href="#" 
                     className="inline-flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-sm border border-stone-200 hover:bg-emerald-50 transition-colors"
-                    aria-label="Instagram"
+                    aria-label="Telegram"
                   >
-                    <Instagram className="h-6 w-6 text-stone-700" />
+                    <Telegram className="h-6 w-6 text-stone-700" />
                   </a>
                   <a 
                     href="#" 
