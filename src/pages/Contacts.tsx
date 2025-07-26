@@ -234,11 +234,11 @@ const Contacts: React.FC = () => {
                   <div className="space-y-4">
                     <div className="flex items-center">
                       <Mail className="h-5 w-5 text-emerald-400 mr-4 flex-shrink-0" />
-                      <span className="text-stone-300">info@reservecold.ru</span>
+                      <span className="text-stone-300">zssayta@list.ru</span>
                     </div>
                     <div className="flex items-center">
                       <Phone className="h-5 w-5 text-emerald-400 mr-4 flex-shrink-0" />
-                      <span className="text-stone-300">+7 (495) 123-45-67</span>
+                      <span className="text-stone-300">+7 (995) 412 09 66</span>
                     </div>
                   </div>
                 </div>
