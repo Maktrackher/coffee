@@ -87,7 +87,7 @@ const About: React.FC = () => {
             <div className="order-2 lg:order-1">
               <div className="relative">
                 <img
-                  src="https://images.pexels.com/photos/4019766/pexels-photo-4019766.jpeg"
+                  src="https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coffe1.jpg"
                   alt="Coffee brewing process"
                   className="w-full h-auto rounded-xl shadow-lg"
                 />
