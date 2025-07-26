@@ -158,7 +158,7 @@ const Home: React.FC = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/4019766/pexels-photo-4019766.jpeg"
+                src="https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//making-coldbrew.jpg"
                 alt="Процесс приготовления кофе"
                 className="w-full h-auto rounded-xl shadow-lg"
               />
