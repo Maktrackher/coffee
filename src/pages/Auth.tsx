@@ -61,14 +61,19 @@ export const AuthPage = () => {
 
   // Проверка существования пользователя
   const checkUserExists = async (email: string) => {
-    const { data: { user }, error } = await supabase.auth.admin.getUserById(email);
-    
-    if (error && error.status !== 404) {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('email')
+        .eq('email', email)
+        .maybeSingle();
+
+      if (error) throw error;
+      return !!data;
+    } catch (error) {
       console.error('Error checking user:', error);
       return false;
     }
-    
-    return !!user;
   };
 
   // Создание или обновление профиля
