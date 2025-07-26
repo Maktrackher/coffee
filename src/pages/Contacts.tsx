@@ -43,10 +43,10 @@ const Contacts: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-stone-900 mb-4">Кофейня</h3>
               <p className="text-stone-600 mb-2">
-                г. Москва, ул. Кофейная, 15
+                г. Волжский, ул. (нету)
               </p>
               <p className="text-stone-500 text-sm">
-                (метро "Баррикадная", 5 минут пешком)
+                (Готовим дома)
               </p>
               <Link 
                 to="#" 
