@@ -162,9 +162,9 @@ const Contacts: React.FC = () => {
                   <a 
                     href="#" 
                     className="inline-flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-sm border border-stone-200 hover:bg-emerald-50 transition-colors"
-                    aria-label="Telegram"
+                    aria-label="Phone"
                   >
-                    <Telegram className="h-6 w-6 text-stone-700" />
+                    <Phone className="h-6 w-6 text-stone-700" />
                   </a>
                   <a 
                     href="#" 
