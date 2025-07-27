@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingBag, Star, Clock, MapPin, Package, Award, Leaf, Coffee } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 import { products } from '../data/products';
 import { useCart } from '../context/CartContext';
 
@@ -74,6 +75,12 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div className="bg-stone-50 min-h-screen">
+      <SEOHead 
+        title={`${product.name} - Reserve Cold`}
+        description={product.description}
+        image={product.image?.main}
+        type="product"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link
           to="/products"

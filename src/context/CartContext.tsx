@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, ReactNode, useMemo, useCallback } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { Product, CartItem } from '../types';
 
 interface CartState {
@@ -110,7 +111,19 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 };
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0, itemCount: 0 });
+  const [persistedItems, setPersistedItems] = useLocalStorage<CartItem[]>('cart-items', []);
+  
+  const initialState = useMemo(() => {
+    const { total, itemCount } = calculateTotals(persistedItems);
+    return { items: persistedItems, total, itemCount };
+  }, [persistedItems]);
+  
+  const [state, dispatch] = useReducer(cartReducer, initialState);
+
+  // Синхронизация с localStorage
+  React.useEffect(() => {
+    setPersistedItems(state.items);
+  }, [state.items, setPersistedItems]);
 
   const addToCart = useCallback((product: Product) => {
     dispatch({ type: 'ADD_TO_CART', payload: product });

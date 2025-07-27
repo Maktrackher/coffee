@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://melodious-syrniki-4e4279.netlify.app/sitemap.xml

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Filter, X, ChevronDown, Check, Coffee, ArrowRight } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 import ProductCard from '../components/ProductCard';
 import { products } from '../data/products';
 
@@ -81,6 +82,10 @@ const Products: React.FC = () => {
 
   return (
     <div className="bg-stone-50 min-h-screen">
+      <SEOHead 
+        title="Коллекция холодного кофе - Reserve Cold"
+        description="Исключительные вкусовые профили. Отборные моносорта и купажи, приготовленные по нашей фирменной технологии холодного заваривания в течение 24 часов."
+      />
       {/* Hero Section */}
       <section className="relative bg-stone-900 text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coldbrew-hero1.jpg')] bg-cover bg-center opacity-30" />

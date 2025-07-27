@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Coffee, Clock, Award, Leaf, Star, Shield } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 import ProductCard from '../components/ProductCard';
 import { products } from '../data/products';
 
@@ -9,6 +10,10 @@ const Home: React.FC = () => {
 
   return (
     <div>
+      <SEOHead 
+        title="Reserve Cold - Премиальный холодный кофе"
+        description="Откройте для себя мягкие, насыщенные вкусы нашего тщательно приготовленного холодного кофе. Изготовлен из премиальных зерен и заварен до совершенства в течение 24 часов."
+      />
       {/* Hero Section */}
       <section className="relative bg-stone-900 text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://ivdyisdjulizdrtxlfpb.supabase.co/storage/v1/object/public/images//coldbrew-hero2.jpg')] bg-cover bg-center opacity-40" />
