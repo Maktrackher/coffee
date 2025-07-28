@@ -23,6 +23,7 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [profileLoading, setProfileLoading] = useState(true);
@@ -143,6 +144,8 @@ const Header: React.FC = () => {
             navigation={navigation} 
             isScrolled={isScrolled} 
             isActive={isActive}
+            activeDropdown={activeDropdown}
+            setActiveDropdown={setActiveDropdown}
           />
           
           <UserActions 
@@ -217,10 +220,17 @@ const DesktopNavigation: React.FC<{
   navigation: NavigationItem[];
   isScrolled: boolean;
   isActive: (path: string) => boolean;
-}> = ({ navigation, isScrolled, isActive }) => (
+  activeDropdown: string | null;
+  setActiveDropdown: (value: string | null) => void;
+}> = ({ navigation, isScrolled, isActive, activeDropdown, setActiveDropdown }) => (
   <nav className="hidden md:flex items-center space-x-6">
     {navigation.map((item) => (
-      <div key={item.name} className="relative group">
+      <div 
+        key={item.name} 
+        className="relative"
+        onMouseEnter={() => item.subItems && setActiveDropdown(item.name)}
+        onMouseLeave={() => setActiveDropdown(null)}
+      >
         <Link
           to={item.href}
           className={`flex items-center py-2 px-3 font-medium transition-colors rounded-lg ${
@@ -231,17 +241,18 @@ const DesktopNavigation: React.FC<{
         >
           {item.name}
           {item.subItems && (
-            <ChevronDown className={`ml-1 h-4 w-4 transition-transform group-hover:rotate-180 ${
+            <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''} ${
               isScrolled ? 'text-stone-500' : 'text-white/70 drop-shadow-md'
             }`} />
           )}
         </Link>
 
-        {item.subItems && (
-          <div className="absolute left-0 mt-2 w-56 origin-top-right scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200">
+        {item.subItems && activeDropdown === item.name && (
+          <div className="absolute left-0 mt-2 w-56 origin-top-right transition-all duration-200 z-50">
             <motion.div 
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -10, opacity: 0 }}
               className="bg-white rounded-lg shadow-lg ring-1 ring-black/5 overflow-hidden"
             >
               {item.subItems.map((subItem) => (
