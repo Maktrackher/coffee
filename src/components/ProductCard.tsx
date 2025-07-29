@@ -21,7 +21,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       case 'Легкий': return 'bg-emerald-100 text-emerald-800';
       case 'Средний': return 'bg-amber-100 text-amber-800';
       case 'Крепкий': return 'bg-red-100 text-red-800';
-      default: return 'bg-stone-100 text-stone-800';
+      navigate(`/products/${product.id}`);
     }
   };
 
